@@ -25,6 +25,15 @@ static struct ccu_clk_map r40_clks[] = {
 	[CLK_BUS_OHCI1]		= { 0x060, BIT(30), NULL },
 	[CLK_BUS_OHCI2]		= { 0x060, BIT(31), NULL },
 
+	[CLK_BUS_UART0]		= { 0x06c, BIT(16), NULL },
+	[CLK_BUS_UART1]		= { 0x06c, BIT(17), NULL },
+	[CLK_BUS_UART2]		= { 0x06c, BIT(18), NULL },
+	[CLK_BUS_UART3]		= { 0x06c, BIT(19), NULL },
+	[CLK_BUS_UART4]		= { 0x06c, BIT(20), NULL },
+	[CLK_BUS_UART5]		= { 0x06c, BIT(21), NULL },
+	[CLK_BUS_UART6]		= { 0x06c, BIT(22), NULL },
+	[CLK_BUS_UART7]		= { 0x06c, BIT(23), NULL },
+
 	[CLK_MMC0]		= { 0x088, BIT(31), &mmc_clk_set_rate },
 	[CLK_MMC1]		= { 0x08c, BIT(31), &mmc_clk_set_rate },
 	[CLK_MMC2]		= { 0x090, BIT(31), &mmc_clk_set_rate },

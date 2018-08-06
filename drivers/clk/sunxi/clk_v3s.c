@@ -19,6 +19,10 @@ static struct ccu_clk_map v3s_clks[] = {
 	[CLK_BUS_SPI0]		= { 0x060, BIT(20), NULL },
 	[CLK_BUS_OTG]		= { 0x060, BIT(24), NULL },
 
+	[CLK_BUS_UART0]		= { 0x06c, BIT(16), NULL },
+	[CLK_BUS_UART1]		= { 0x06c, BIT(17), NULL },
+	[CLK_BUS_UART2]		= { 0x06c, BIT(18), NULL },
+
 	[CLK_MMC0]		= { 0x088, BIT(31), &mmc_clk_set_rate },
 	[CLK_MMC1]		= { 0x08c, BIT(31), &mmc_clk_set_rate },
 	[CLK_MMC2]		= { 0x090, BIT(31), &mmc_clk_set_rate },
