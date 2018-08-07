@@ -22,10 +22,13 @@ static struct ccu_clk_map a10_clks[] = {
 	[CLK_AHB_MMC1]		= { 0x060, BIT(9), NULL },
 	[CLK_AHB_MMC2]		= { 0x060, BIT(10), NULL },
 	[CLK_AHB_MMC3]		= { 0x060, BIT(11), NULL },
+	[CLK_AHB_EMAC]		= { 0x060, BIT(17), NULL },
 	[CLK_AHB_SPI0]		= { 0x060, BIT(20), NULL },
 	[CLK_AHB_SPI1]		= { 0x060, BIT(21), NULL },
 	[CLK_AHB_SPI2]		= { 0x060, BIT(22), NULL },
 	[CLK_AHB_SPI3]		= { 0x060, BIT(23), NULL },
+
+	[CLK_AHB_GMAC]		= { 0x064, BIT(17), NULL },
 
 	[CLK_APB1_UART0]	= { 0x06c, BIT(16), NULL },
 	[CLK_APB1_UART1]	= { 0x06c, BIT(17), NULL },

@@ -19,6 +19,7 @@ static struct ccu_clk_map a10s_clks[] = {
 	[CLK_AHB_MMC0]		= { 0x060, BIT(8), NULL },
 	[CLK_AHB_MMC1]		= { 0x060, BIT(9), NULL },
 	[CLK_AHB_MMC2]		= { 0x060, BIT(10), NULL },
+	[CLK_AHB_EMAC]		= { 0x060, BIT(17), NULL },
 	[CLK_AHB_SPI0]		= { 0x060, BIT(20), NULL },
 	[CLK_AHB_SPI1]		= { 0x060, BIT(21), NULL },
 	[CLK_AHB_SPI2]		= { 0x060, BIT(22), NULL },

@@ -16,6 +16,7 @@ static struct ccu_clk_map h3_clks[] = {
 	[CLK_BUS_MMC0]		= { 0x060, BIT(8), NULL },
 	[CLK_BUS_MMC1]		= { 0x060, BIT(9), NULL },
 	[CLK_BUS_MMC2]		= { 0x060, BIT(10), NULL },
+	[CLK_BUS_EMAC]		= { 0x060, BIT(17), NULL },
 	[CLK_BUS_SPI0]		= { 0x060, BIT(20), NULL },
 	[CLK_BUS_SPI1]		= { 0x060, BIT(21), NULL },
 	[CLK_BUS_OTG]		= { 0x060, BIT(23), NULL },

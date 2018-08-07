@@ -16,6 +16,7 @@ static struct ccu_clk_map a83t_clks[] = {
 	[CLK_BUS_MMC0]		= { 0x060, BIT(8), NULL },
 	[CLK_BUS_MMC1]		= { 0x060, BIT(9), NULL },
 	[CLK_BUS_MMC2]		= { 0x060, BIT(10), NULL },
+	[CLK_BUS_EMAC]		= { 0x060, BIT(17), NULL },
 	[CLK_BUS_OTG]		= { 0x060, BIT(24), NULL },
 	[CLK_BUS_EHCI0]		= { 0x060, BIT(26), NULL },
 	[CLK_BUS_EHCI1]		= { 0x060, BIT(27), NULL },
