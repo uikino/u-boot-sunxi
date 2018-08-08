@@ -54,50 +54,6 @@ static int clk_of_xlate_default(struct clk *clk,
 	return 0;
 }
 
-static int clk_get_by_indexed_prop(struct udevice *dev, const char *prop_name,
-				   int index, struct clk *clk)
-{
-	int ret;
-	struct ofnode_phandle_args args;
-	struct udevice *dev_clk;
-	const struct clk_ops *ops;
-
-	debug("%s(dev=%p, index=%d, clk=%p)\n", __func__, dev, index, clk);
-
-	assert(clk);
-	clk->dev = NULL;
-
-	ret = dev_read_phandle_with_args(dev, prop_name, "#clock-cells", 0,
-					 index, &args);
-	if (ret) {
-		debug("%s: fdtdec_parse_phandle_with_args failed: err=%d\n",
-		      __func__, ret);
-		return ret;
-	}
-
-	ret = uclass_get_device_by_ofnode(UCLASS_CLK, args.node, &dev_clk);
-	if (ret) {
-		debug("%s: uclass_get_device_by_of_offset failed: err=%d\n",
-		      __func__, ret);
-		return ret;
-	}
-
-	clk->dev = dev_clk;
-
-	ops = clk_dev_ops(dev_clk);
-
-	if (ops->of_xlate)
-		ret = ops->of_xlate(clk, &args);
-	else
-		ret = clk_of_xlate_default(clk, &args);
-	if (ret) {
-		debug("of_xlate() failed: %d\n", ret);
-		return ret;
-	}
-
-	return clk_request(dev_clk, clk);
-}
-
 static int clk_get_by_index_tail(int ret, ofnode node,
 				 struct ofnode_phandle_args *args,
 				 const char *list_name, int index,
@@ -197,10 +153,11 @@ bulk_get_err:
 
 static int clk_set_default_parents(struct udevice *dev)
 {
+	struct ofnode_phandle_args args;
 	struct clk clk, parent_clk;
 	int index;
 	int num_parents;
-	int ret;
+	int ret, err;
 
 	num_parents = dev_count_phandle_with_args(dev, "assigned-clock-parents",
 						  "#clock-cells");
@@ -211,8 +168,13 @@ static int clk_set_default_parents(struct udevice *dev)
 	}
 
 	for (index = 0; index < num_parents; index++) {
-		ret = clk_get_by_indexed_prop(dev, "assigned-clock-parents",
-					      index, &parent_clk);
+		err = dev_read_phandle_with_args(dev, "assigned-clock-parents",
+						 "#clock-cells", 0,
+						 index, &args);
+
+		ret = clk_get_by_index_tail(err, dev_ofnode(dev), &args,
+					    "assigned-clock-parents",
+					    index > 0, &parent_clk);
 		/* If -ENOENT, this is a no-op entry */
 		if (ret == -ENOENT)
 			continue;
@@ -223,8 +185,13 @@ static int clk_set_default_parents(struct udevice *dev)
 			return ret;
 		}
 
-		ret = clk_get_by_indexed_prop(dev, "assigned-clocks",
-					      index, &clk);
+		err = dev_read_phandle_with_args(dev, "assigned-clocks",
+						 "#clock-cells", 0,
+						 index, &args);
+
+		ret = clk_get_by_index_tail(err, dev_ofnode(dev), &args,
+					    "assigned-clocks",
+					    index > 0, &clk);
 		if (ret) {
 			debug("%s: could not get assigned clock %d for %s\n",
 			      __func__, index, dev_read_name(dev));
@@ -252,11 +219,12 @@ static int clk_set_default_parents(struct udevice *dev)
 
 static int clk_set_default_rates(struct udevice *dev)
 {
+	struct ofnode_phandle_args args;
 	struct clk clk;
 	int index;
 	int num_rates;
 	int size;
-	int ret = 0;
+	int err, ret = 0;
 	u32 *rates = NULL;
 
 	size = dev_read_size(dev, "assigned-clock-rates");
@@ -277,8 +245,13 @@ static int clk_set_default_rates(struct udevice *dev)
 		if (!rates[index])
 			continue;
 
-		ret = clk_get_by_indexed_prop(dev, "assigned-clocks",
-					      index, &clk);
+		err = dev_read_phandle_with_args(dev, "assigned-clocks",
+						 "#clock-cells", 0,
+						 index, &args);
+
+		ret = clk_get_by_index_tail(err, dev_ofnode(dev), &args,
+					    "assigned-clocks",
+					    index > 0, &clk);
 		if (ret) {
 			debug("%s: could not get assigned clock %d for %s\n",
 			      __func__, index, dev_read_name(dev));
