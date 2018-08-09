@@ -50,6 +50,12 @@ static struct ccu_reset_map a23_resets[] = {
 	[RST_BUS_OTG]		= { 0x2c0, BIT(24) },
 	[RST_BUS_EHCI]		= { 0x2c0, BIT(26) },
 	[RST_BUS_OHCI]		= { 0x2c0, BIT(29) },
+
+	[RST_BUS_UART0]		= { 0x2d8, BIT(16) },
+	[RST_BUS_UART1]		= { 0x2d8, BIT(17) },
+	[RST_BUS_UART2]		= { 0x2d8, BIT(18) },
+	[RST_BUS_UART3]		= { 0x2d8, BIT(19) },
+	[RST_BUS_UART4]		= { 0x2d8, BIT(20) },
 };
 
 static const struct ccu_desc sun8i_a23_ccu_desc = {

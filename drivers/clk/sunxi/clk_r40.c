@@ -63,6 +63,15 @@ static struct ccu_reset_map r40_resets[] = {
 	[RST_BUS_OHCI0]		= { 0x2c0, BIT(29) },
 	[RST_BUS_OHCI1]		= { 0x2c0, BIT(30) },
 	[RST_BUS_OHCI2]		= { 0x2c0, BIT(31) },
+
+	[RST_BUS_UART0]		= { 0x2d8, BIT(16) },
+	[RST_BUS_UART1]		= { 0x2d8, BIT(17) },
+	[RST_BUS_UART2]		= { 0x2d8, BIT(18) },
+	[RST_BUS_UART3]		= { 0x2d8, BIT(19) },
+	[RST_BUS_UART4]		= { 0x2d8, BIT(20) },
+	[RST_BUS_UART5]		= { 0x2d8, BIT(21) },
+	[RST_BUS_UART6]		= { 0x2d8, BIT(22) },
+	[RST_BUS_UART7]		= { 0x2d8, BIT(23) },
 };
 
 static const struct ccu_desc sun8i_r40_ccu_desc = {

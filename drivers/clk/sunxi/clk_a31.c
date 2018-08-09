@@ -72,6 +72,13 @@ static struct ccu_reset_map a31_resets[] = {
 	[RST_AHB1_OHCI0]	= { 0x2c0, BIT(29) },
 	[RST_AHB1_OHCI1]	= { 0x2c0, BIT(30) },
 	[RST_AHB1_OHCI2]	= { 0x2c0, BIT(31) },
+
+	[RST_APB2_UART0]	= { 0x2d8, BIT(16) },
+	[RST_APB2_UART1]	= { 0x2d8, BIT(17) },
+	[RST_APB2_UART2]	= { 0x2d8, BIT(18) },
+	[RST_APB2_UART3]	= { 0x2d8, BIT(19) },
+	[RST_APB2_UART4]	= { 0x2d8, BIT(20) },
+	[RST_APB2_UART5]	= { 0x2d8, BIT(21) },
 };
 
 static const struct ccu_desc sun6i_a31_ccu_desc = {

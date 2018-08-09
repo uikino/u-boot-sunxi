@@ -70,6 +70,11 @@ static struct ccu_reset_map h3_resets[] = {
 	[RST_BUS_OHCI1]		= { 0x2c0, BIT(29) },
 	[RST_BUS_OHCI2]		= { 0x2c0, BIT(30) },
 	[RST_BUS_OHCI3]		= { 0x2c0, BIT(31) },
+
+	[RST_BUS_UART0]		= { 0x2d8, BIT(16) },
+	[RST_BUS_UART1]		= { 0x2d8, BIT(17) },
+	[RST_BUS_UART2]		= { 0x2d8, BIT(18) },
+	[RST_BUS_UART3]		= { 0x2d8, BIT(19) },
 };
 
 static const struct ccu_desc sun8i_h3_ccu_desc = {

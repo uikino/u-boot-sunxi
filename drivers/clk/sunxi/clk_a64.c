@@ -60,6 +60,12 @@ static struct ccu_reset_map a64_resets[] = {
 	[RST_BUS_EHCI1]		= { 0x2c0, BIT(25) },
 	[RST_BUS_OHCI0]		= { 0x2c0, BIT(28) },
 	[RST_BUS_OHCI1]		= { 0x2c0, BIT(29) },
+
+	[RST_BUS_UART0]		= { 0x2d8, BIT(16) },
+	[RST_BUS_UART1]		= { 0x2d8, BIT(17) },
+	[RST_BUS_UART2]		= { 0x2d8, BIT(18) },
+	[RST_BUS_UART3]		= { 0x2d8, BIT(19) },
+	[RST_BUS_UART4]		= { 0x2d8, BIT(20) },
 };
 
 static const struct ccu_desc sun50i_a64_ccu_desc = {

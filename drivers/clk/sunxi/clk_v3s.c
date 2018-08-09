@@ -40,6 +40,10 @@ static struct ccu_reset_map v3s_resets[] = {
 	[RST_BUS_MMC2]		= { 0x2c0, BIT(10) },
 	[RST_BUS_SPI0]		= { 0x2c0, BIT(20) },
 	[RST_BUS_OTG]		= { 0x2c0, BIT(24) },
+
+	[RST_BUS_UART0]		= { 0x2d8, BIT(16) },
+	[RST_BUS_UART1]		= { 0x2d8, BIT(17) },
+	[RST_BUS_UART2]		= { 0x2d8, BIT(18) },
 };
 
 static const struct ccu_desc sun8i_v3s_ccu_desc = {
