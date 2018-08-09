@@ -34,6 +34,8 @@ static struct ccu_clk_map h3_clks[] = {
 	[CLK_BUS_UART2]		= { 0x06c, BIT(18), NULL },
 	[CLK_BUS_UART3]		= { 0x06c, BIT(19), NULL },
 
+	[CLK_BUS_EPHY]		= { 0x070, BIT(0), NULL },
+
 	[CLK_MMC0]		= { 0x088, BIT(31), &mmc_clk_set_rate },
 	[CLK_MMC1]		= { 0x08c, BIT(31), &mmc_clk_set_rate },
 	[CLK_MMC2]		= { 0x090, BIT(31), &mmc_clk_set_rate },
@@ -72,6 +74,8 @@ static struct ccu_reset_map h3_resets[] = {
 	[RST_BUS_OHCI1]		= { 0x2c0, BIT(29) },
 	[RST_BUS_OHCI2]		= { 0x2c0, BIT(30) },
 	[RST_BUS_OHCI3]		= { 0x2c0, BIT(31) },
+
+	[RST_BUS_EPHY]		= { 0x2c8, BIT(2) },
 
 	[RST_BUS_UART0]		= { 0x2d8, BIT(16) },
 	[RST_BUS_UART1]		= { 0x2d8, BIT(17) },
