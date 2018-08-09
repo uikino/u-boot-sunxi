@@ -66,6 +66,8 @@ static struct ccu_reset_map r40_resets[] = {
 	[RST_BUS_OHCI1]		= { 0x2c0, BIT(30) },
 	[RST_BUS_OHCI2]		= { 0x2c0, BIT(31) },
 
+	[RST_BUS_GMAC]		= { 0x2c0, BIT(17) },
+
 	[RST_BUS_UART0]		= { 0x2d8, BIT(16) },
 	[RST_BUS_UART1]		= { 0x2d8, BIT(17) },
 	[RST_BUS_UART2]		= { 0x2d8, BIT(18) },

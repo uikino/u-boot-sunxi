@@ -63,6 +63,7 @@ static struct ccu_reset_map a31_resets[] = {
 	[RST_AHB1_MMC1]		= { 0x2c0, BIT(9) },
 	[RST_AHB1_MMC2]		= { 0x2c0, BIT(10) },
 	[RST_AHB1_MMC3]		= { 0x2c0, BIT(11) },
+	[RST_AHB1_EMAC]		= { 0x2c0, BIT(17) },
 	[RST_AHB1_SPI0]		= { 0x2c0, BIT(20) },
 	[RST_AHB1_SPI1]		= { 0x2c0, BIT(21) },
 	[RST_AHB1_SPI2]		= { 0x2c0, BIT(22) },
