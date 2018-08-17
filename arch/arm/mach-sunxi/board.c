@@ -10,6 +10,7 @@
  */
 
 #include <common.h>
+#include <fat.h>
 #include <mmc.h>
 #include <i2c.h>
 #include <serial.h>
@@ -252,6 +253,55 @@ uint32_t sunxi_get_boot_device(void)
 	panic("Unknown boot source %d\n", boot_source);
 	return -1;		/* Never reached */
 }
+
+#if CONFIG_IS_ENABLED(ENV_IS_IN_FAT)
+static int find_first_sd_device(void)
+{
+	struct mmc *mmc;
+	int i;
+
+	for (i = 0; (mmc = find_mmc_device(i)); i++) {
+		if (!mmc_init(mmc) && IS_SD(mmc))
+			return i;
+	}
+
+	return -ENODEV;
+}
+
+static int find_first_mmc_device(void)
+{
+	struct mmc *mmc;
+	int i;
+
+	for (i = 0; (mmc = find_mmc_device(i)); i++) {
+		if (!mmc_init(mmc) && IS_MMC(mmc))
+			return i;
+	}
+
+	return -ENODEV;
+}
+
+char *get_env_fat_dev_part(void)
+{
+	int devno, boot_source;
+	static char dev_part[10];
+
+	boot_source = readb(SPL_ADDR + 0x28);
+	switch (boot_source) {
+	case SUNXI_BOOTED_FROM_MMC0:
+		devno = find_first_sd_device();
+		break;
+	case SUNXI_BOOTED_FROM_MMC2:
+		devno = find_first_mmc_device();
+		break;
+	default:
+		return CONFIG_ENV_FAT_DEVICE_AND_PART;
+        }
+
+	snprintf(dev_part, sizeof(dev_part), "%d:auto", devno);
+	return dev_part;
+}
+#endif
 
 #ifdef CONFIG_SPL_BUILD
 u32 spl_boot_device(void)
