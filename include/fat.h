@@ -185,6 +185,7 @@ static inline u32 sect_to_clust(fsdata *fsdata, int sect)
 	return (sect - fsdata->data_begin) / fsdata->clust_size;
 }
 
+char *get_env_fat_dev_part(void);
 int file_fat_detectfs(void);
 int fat_exists(const char *filename);
 int fat_size(const char *filename, loff_t *size);
