@@ -12,6 +12,45 @@
 #include <dt-bindings/clock/sun50i-a64-ccu.h>
 #include <dt-bindings/reset/sun50i-a64-ccu.h>
 
+#define CLK_APB2			26
+#define CLK_OSC_32K			(CLK_GPU + 1)
+#define CLK_OSC_24M			(CLK_OSC_32K + 1)
+
+static const unsigned long periph0_parents[] = {
+	CLK_OSC_24M,
+};
+
+static const unsigned long apb2_parents[] = {
+	CLK_OSC_32K,
+	CLK_OSC_24M,
+	CLK_PLL_PERIPH0,
+	CLK_PLL_PERIPH0,
+};
+
+static const unsigned long uart_parents[] = {
+	CLK_APB2,
+};
+
+static const struct ccu_clk_tree a64_tree[] = {
+	[CLK_OSC_32K]		= FIXED(OSC_32K_ULL),
+	[CLK_OSC_24M]		= FIXED(OSC_24M_ULL),
+
+	[CLK_PLL_PERIPH0]	= NK(periph0_parents, 0x028,
+				     8, 5,	/* N */
+				     4, 2, 2,	/* K */
+				     2,		/* post-div */
+				     CCU_CLK_F_POSTDIV),
+
+	[CLK_APB2]		= MP(apb2_parents, 0x058,
+				     0, 5,	/* M */
+				     16, 2,	/* P */
+				     24, 2,	/* mux */
+				     0,
+				     0),
+
+	[CLK_BUS_UART0]		= MISC(uart_parents),
+};
+
 static const struct ccu_clk_gate a64_gates[] = {
 	[CLK_BUS_OTG]		= GATE(0x060, BIT(23)),
 	[CLK_BUS_EHCI0]		= GATE(0x060, BIT(24)),
@@ -52,6 +91,7 @@ static const struct ccu_reset a64_resets[] = {
 };
 
 static const struct ccu_desc a64_ccu_desc = {
+	.tree = a64_tree,
 	.gates = a64_gates,
 	.resets = a64_resets,
 };
