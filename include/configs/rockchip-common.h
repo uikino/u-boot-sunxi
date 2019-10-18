@@ -9,6 +9,8 @@
 
 #define CONFIG_SYS_NS16550_MEM32
 
+#define CONFIG_SPL_PAD_TO		8355840
+
 #ifndef CONFIG_SPL_BUILD
 
 /* First try to boot from SD (index 0), then eMMC (index 1) */

@@ -887,7 +887,7 @@ ALL-y += u-boot-with-dtb.bin
 endif
 
 ifeq ($(CONFIG_ARCH_ROCKCHIP)$(CONFIG_SPL),yy)
-ALL-y += spl/u-boot-spl-rockchip.bin
+ALL-y += u-boot-rockchip.bin
 endif
 
 LDFLAGS_u-boot += $(LDFLAGS_FINAL)
@@ -1342,6 +1342,13 @@ else
 ROCKCHIP_IMG_TYPE := rksd
 endif
 
+# rockchip u-boot image
+ifdef CONFIG_SPL_LOAD_FIT
+ROCKCHIP_UBOOT_IMG := u-boot.itb
+else
+ROCKCHIP_UBOOT_IMG := u-boot.img
+endif
+
 # TPL + SPL
 ifeq ($(CONFIG_SPL)$(CONFIG_TPL),yy)
 MKIMAGEFLAGS_u-boot-tpl-rockchip.bin = -n $(CONFIG_SYS_SOC) -T $(ROCKCHIP_IMG_TYPE)
@@ -1355,7 +1362,10 @@ spl/u-boot-spl-rockchip.bin: spl/u-boot-spl.bin FORCE
 	$(call if_changed,mkimage)
 endif
 
-endif
+u-boot-rockchip.bin: spl/u-boot-spl-rockchip.bin $(ROCKCHIP_UBOOT_IMG) FORCE
+	$(call if_changed,binman)
+
+endif # CONFIG_ARCH_ROCKCHIP
 
 ifeq ($(CONFIG_ARCH_LPC32XX)$(CONFIG_SPL),yy)
 MKIMAGEFLAGS_lpc32xx-spl.img = -T lpc32xximage -a $(CONFIG_SPL_TEXT_BASE)
